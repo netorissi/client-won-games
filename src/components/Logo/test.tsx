@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import media from 'styled-media-query';
 import 'jest-styled-components';
 
 import { renderWithTheme } from 'utils/tests/helpers';
