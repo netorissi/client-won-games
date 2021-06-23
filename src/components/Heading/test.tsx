@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import 'jest-styled-components';
 
 import { renderWithTheme } from 'utils/tests/helpers';
 
@@ -25,7 +24,11 @@ describe('<Heading/>', () => {
   });
 
   it('should render white heading with line left', () => {
-    renderWithTheme(<Heading lineLeft>Won Games</Heading>);
+    renderWithTheme(
+      <Heading lineLeft lineColor="secondary">
+        Won Games
+      </Heading>
+    );
 
     expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
       'border-left': `0.7rem solid ${theme.colors.secondary}`
@@ -38,6 +41,66 @@ describe('<Heading/>', () => {
     expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyleRule(
       'border-bottom',
       `0.5rem solid ${theme.colors.primary}`,
+      {
+        modifier: '::after'
+      }
+    );
+  });
+
+  it('should render white heading with a small size', () => {
+    renderWithTheme(<Heading size="small">Won Games</Heading>);
+
+    expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
+      'font-size': theme.font.sizes.medium
+    });
+
+    expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyleRule(
+      'width',
+      '3rem',
+      {
+        modifier: '::after'
+      }
+    );
+  });
+
+  it('should render white heading with a primary color', () => {
+    renderWithTheme(
+      <Heading lineColor="primary" lineLeft lineBottom>
+        Won Games
+      </Heading>
+    );
+
+    const heading = screen.getByRole('heading', { name: /won games/i });
+
+    expect(heading).toHaveStyle({
+      'border-left': `0.7rem solid ${theme.colors.primary}`
+    });
+
+    expect(heading).toHaveStyleRule(
+      'border-bottom',
+      `0.5rem solid ${theme.colors.primary}`,
+      {
+        modifier: '::after'
+      }
+    );
+  });
+
+  it('should render white heading with a secondary color', () => {
+    renderWithTheme(
+      <Heading lineColor="secondary" lineLeft lineBottom>
+        Won Games
+      </Heading>
+    );
+
+    const heading = screen.getByRole('heading', { name: /won games/i });
+
+    expect(heading).toHaveStyle({
+      'border-left': `0.7rem solid ${theme.colors.secondary}`
+    });
+
+    expect(heading).toHaveStyleRule(
+      'border-bottom',
+      `0.5rem solid ${theme.colors.secondary}`,
       {
         modifier: '::after'
       }
