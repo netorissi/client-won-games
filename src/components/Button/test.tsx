@@ -57,4 +57,17 @@ describe('<Button/>', () => {
     expect(screen.getByText(/won games/i)).toBeInTheDocument();
     expect(screen.getByTestId(/icon/i)).toBeInTheDocument();
   });
+
+  it('should render an link button', () => {
+    renderWithTheme(
+      <Button as="a" href="/link">
+        Won Games
+      </Button>
+    );
+
+    expect(screen.getByRole('link', { name: /won games/i })).toHaveAttribute(
+      'href',
+      '/link'
+    );
+  });
 });
